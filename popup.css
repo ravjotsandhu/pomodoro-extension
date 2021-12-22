@@ -1,0 +1,94 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: rgb(235, 124, 124);
+    z-index: 10;
+
+    /* position: fixed; */
+    /* background-color: rgba(0, 0, 0, 0.3); */
+}
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+.container-timer {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 100px;
+    font-weight: 600;
+}
+.timer-button {
+    display: flex;
+    justify-content: center;
+}
+#btn-start {
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background: white;
+    color: rgb(235, 124, 124);
+    font-size: large;
+    margin: 10px;
+}
+#btn-pause {
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background: white;
+    color: rgb(235, 124, 124);
+    font-size: large;
+    margin: 10px;
+}
+.btn {
+    padding: 10px;
+    margin-right: 10px;
+    font-size: large;
+    background: none;
+    border: none;
+    color: white;
+}
+.active {
+    background: rgba(233, 176, 176, 0.897);
+    border-radius: 10px;
+}
+#reset {
+    margin-right: auto;
+    color: white;
+    padding: 10px;
+}
+#settings-popup {
+    margin-left: auto;
+    color: white;
+    padding: 10px;
+    transform: scale(0);
+}
+.input-long-break {
+    border-radius: 2px;
+    width: 50px;
+    margin-left: 10px;
+}
+.span-long {
+    color: grey;
+    font-weight: bold;
+}
+.description {
+    color: grey;
+    font-size: small;
+}
+.long-break-interval {
+    display: flex;
+    content: space-between;
+}
+
+#cross {
+    color: grey;
+    margin-left: auto;
+}

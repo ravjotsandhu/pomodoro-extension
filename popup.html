@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="popup.css" />
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="buttons">
+
+            <i class="fas fa-undo" id="reset"></i>
+            <button class="btn active" id="Pomodoro">Pomodoro</button>
+            <button class="btn" id="Short-break">Short-break</button>
+            <button class="btn" id="Long-break">Long-break</button>
+            <i class="fas fa-cog" id="settings-popup" data-modal-target="#modal"></i>
+
+        </div>
+
+        <div class="container-timer">
+
+            <div contenteditable="true" class="hrs">00</div>
+            :
+            <div contenteditable="true" class="mins">00</div>
+            :
+            <div contenteditable="true" class="secs">00</div>
+        </div>
+        <div class="timer-button">
+            <button id="btn-start">Start</button>
+            <!-- <button id="btn-pause">Pause</button> -->
+        </div>
+    </div>
+
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
