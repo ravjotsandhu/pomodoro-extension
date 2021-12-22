@@ -12,6 +12,10 @@ let startpause = document.getElementById('btn-start')
 let reset = document.getElementById('reset')
 let settings = document.getElementById('settings-popup')
 
+const setting = document.getElementById('settings-popup')
+const closepopup = document.getElementById('cross')
+const inputLongBreak = document.querySelector('.input-long-break')
+let counter = 0
 let g_interval
 let bool = false
 
@@ -43,11 +47,7 @@ reset.addEventListener('click', function () {
         startpause.innerText = 'Start'
     }
 })
-// // hrs.onclick = function (event) {
-// //   if(event.dbClick){
-// //     editTmer();
-// //   }
-// // }
+
 // // timer.addEventListener("dbclick", function () { });
 // // start.addEventListener("click", function () {});
 
@@ -85,6 +85,7 @@ function pomodoroTimer() {
         secs.innerText = sec
         currtime = document.querySelector('.container-timer').innerText
         if (time === 0) {
+            counter++
             nextMode = 'shortbreak'
             clearInterval(interval)
             checkNextTimer()
@@ -104,7 +105,12 @@ function shortBreakTimer() {
         secs.innerText = sec
         if (time === 0) {
             clearInterval(interval)
-            nextMode = 'longbreak'
+            if (counter == inputLongBreak.value) {
+                nextMode = 'longbreak'
+                counter = 0
+            } else {
+                nextMode = 'pomodoro'
+            }
             checkNextTimer()
         }
     }, 1000)
@@ -150,3 +156,11 @@ function checkNextTimer() {
         g_interval = longBreakTimer()
     }
 }
+
+setting.addEventListener('click', () => {
+    overlay.classList.add('active')
+})
+
+closepopup.addEventListener('click', () => {
+    overlay.classList.remove('active')
+})

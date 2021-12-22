@@ -19,7 +19,29 @@
             <button class="btn active" id="Pomodoro">Pomodoro</button>
             <button class="btn" id="Short-break">Short-break</button>
             <button class="btn" id="Long-break">Long-break</button>
-            <i class="fas fa-cog" id="settings-popup" data-modal-target="#modal"></i>
+            <i class="fas fa-cog" id="settings-popup"></i>
+
+        </div>
+        <div id="overlay">
+
+            <div class="modal-container">
+
+                <i class="fas fa-times" id="cross"></i>
+
+                <div class="Long-break-interval">
+                    <span class="span-long">Long break Interval</span>
+                    <input class="input-long-break" type="number" value="4" min="0" step="1"></input>
+                    <span>How to use this? A pomodoro is a time-boxed activity that is usually set to 25 minutes.
+                        When the pomodoro is finished, a short break is started. The short break is usually set to
+                        5 minutes. When the short break is finished, another pomodoro is started. The long break is
+                        usually set to 15 minutes. When the long break is finished, another pomodoro is started.
+
+                        The long break interval is the number of pomodoros that are completed before a long break is
+                        You can set the long break interval to 0 to disable long breaks.
+                    </span>
+                </div>
+
+            </div>
 
         </div>
 
@@ -36,7 +58,6 @@
             <!-- <button id="btn-pause">Pause</button> -->
         </div>
     </div>
-
 
     <script src="popup.js"></script>
 </body>
