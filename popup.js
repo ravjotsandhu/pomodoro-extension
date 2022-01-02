@@ -63,10 +63,7 @@ closepopup.addEventListener('click', () => {
 })
 
 startpause.addEventListener('click', function () {
-    let seconds = getRemainingTime()
-    localStorage.setItem('second', JSON.stringify(getRemainingTime()))
-
-    if (!bool && seconds === 0) {
+    if (!bool && JSON.parse(localStorage.getItem('second')) === 0) {
         startpause.innerText = 'Pause'
         if (pomodoro.classList.contains('active')) {
             g_interval = pomodoroTimer(parseInt(pomodoroLength.value))
@@ -76,10 +73,12 @@ startpause.addEventListener('click', function () {
             g_interval = longBreakTimer(parseInt(longBreakLength.value))
         }
         bool = true
-    } else if (!bool && seconds > 0) {
+    } else if (!bool && JSON.parse(localStorage.getItem('second')) > 0) {
         startpause.innerText = 'Pause'
-        let minutes = Math.floor(seconds / 60)
-        let sec = seconds - minutes * 60
+        let minutes = Math.floor(
+            JSON.parse(localStorage.getItem('second')) / 60
+        )
+        let sec = JSON.parse(localStorage.getItem('second')) - minutes * 60
         minutes = minutes + sec / 60
         console.log(minutes)
         if (pomodoro.classList.contains('active')) {
@@ -110,6 +109,7 @@ function pomodoroTimer(t) {
     let time = t * 60
     let interval = setInterval(function () {
         time--
+        localStorage.setItem('second', JSON.stringify(getRemainingTime()))
         let hr = Math.floor(time / 3600)
         let min = Math.floor((time % 3600) / 60)
         let sec = time % 60
@@ -130,6 +130,7 @@ function shortBreakTimer(t) {
     let time = t * 60
     let interval = setInterval(function () {
         time--
+        localStorage.setItem('second', JSON.stringify(getRemainingTime()))
         let hr = Math.floor(time / 3600)
         let min = Math.floor((time % 3600) / 60)
         let sec = time % 60
@@ -154,6 +155,7 @@ function longBreakTimer(t) {
     let time = t * 60
     let interval = setInterval(function () {
         time--
+        localStorage.setItem('second', JSON.stringify(getRemainingTime()))
         let hr = Math.floor(time / 3600)
         let min = Math.floor((time % 3600) / 60)
         let sec = time % 60
