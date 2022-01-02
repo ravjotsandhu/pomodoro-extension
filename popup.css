@@ -48,6 +48,7 @@
     margin: 10px;
 }
 .btn {
+    font-family: Comic Sans MS;
     padding: 10px;
     margin-right: 10px;
     font-size: large;
@@ -75,30 +76,55 @@
     width: 50px;
     margin-left: 10px;
 }
-.span-long {
+span.input {
+    font-family: Comic Sans MS;
     color: grey;
     font-weight: bold;
+    margin: 8px;
 }
-.description {
+span.description {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: grey;
     font-size: small;
 }
-.long-break-interval {
+.Long-break-interval {
     display: flex;
-    content: space-between;
+    /* content: space-between; */
+}
+.popup-input-type {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.popup-inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+input {
+    margin: 5px;
+    background-color: rgb(239, 239, 239);
+    padding: 5px;
+    border-radius: 5px;
+    width: 80px;
+    margin-left: 10px;
+    color: rgb(85, 85, 85);
+    box-shadow: none;
+    border: medium;
 }
 .modal-container {
     /* transform: scale(0); */
     display: flex;
     content: space-between;
     flex-direction: column;
+    width: 300px;
     background: rgb(255, 255, 255);
     padding: 10px;
     border-radius: 5px;
-    margin-top: 100px;
-    margin-left: 620px;
-    margin-right: 630px;
-    margin-bottom: 00px;
+    margin-top: 10px;
+    margin-left: 95px;
 }
 /* .modal.active {
     transform: scale(1);

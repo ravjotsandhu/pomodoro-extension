@@ -1,10 +1,11 @@
 let nextMode = ''
 let currtime
+
+const audio = document.querySelector('audio')
 const pomodoro = document.getElementById('Pomodoro')
 const shortbreak = document.getElementById('Short-break')
 const longbreak = document.getElementById('Long-break')
-// const start = document.querySelector(".btn-start");
-// let timer = document.querySelector(".container-timer");
+
 let hrs = document.querySelector('.hrs')
 let mins = document.querySelector('.mins')
 let secs = document.querySelector('.secs')
@@ -14,7 +15,12 @@ let settings = document.getElementById('settings-popup')
 
 const setting = document.getElementById('settings-popup')
 const closepopup = document.getElementById('cross')
-const inputLongBreak = document.querySelector('.input-long-break')
+const inputLongBreak = document.querySelector('.interval-longbreak')
+
+const pomodoroLength = document.querySelector('.input-pomodoro')
+const shortBreakLength = document.querySelector('.input-shortbreak')
+const longBreakLength = document.querySelector('.input-longbreak')
+
 let counter = 0
 let g_interval
 let bool = false
@@ -48,33 +54,60 @@ reset.addEventListener('click', function () {
     }
 })
 
-// // timer.addEventListener("dbclick", function () { });
-// // start.addEventListener("click", function () {});
+setting.addEventListener('click', () => {
+    overlay.classList.add('active')
+})
 
-// function startTimer() {
+closepopup.addEventListener('click', () => {
+    overlay.classList.remove('active')
+})
+
 startpause.addEventListener('click', function () {
-    if (!bool) {
+    let seconds = getRemainingTime()
+    localStorage.setItem('second', JSON.stringify(getRemainingTime()))
+
+    if (!bool && seconds === 0) {
         startpause.innerText = 'Pause'
         if (pomodoro.classList.contains('active')) {
-            g_interval = pomodoroTimer()
+            g_interval = pomodoroTimer(parseInt(pomodoroLength.value))
         } else if (shortbreak.classList.contains('active')) {
-            g_interval = shortBreakTimer()
+            g_interval = shortBreakTimer(parseInt(shortBreakLength.value))
         } else if (longbreak.classList.contains('active')) {
-            g_interval = longBreakTimer()
+            g_interval = longBreakTimer(parseInt(longBreakLength.value))
+        }
+        bool = true
+    } else if (!bool && seconds > 0) {
+        startpause.innerText = 'Pause'
+        let minutes = Math.floor(seconds / 60)
+        let sec = seconds - minutes * 60
+        minutes = minutes + sec / 60
+        console.log(minutes)
+        if (pomodoro.classList.contains('active')) {
+            g_interval = pomodoroTimer(minutes)
+        } else if (shortbreak.classList.contains('active')) {
+            g_interval = shortBreakTimer(minutes)
+        } else if (longbreak.classList.contains('active')) {
+            g_interval = longBreakTimer(minutes)
         }
         bool = true
     } else {
         startpause.innerText = 'Start'
-        clearTimeout(g_interval)
+        clearInterval(g_interval)
         bool = false
     }
 })
-// }
 
-// function editTimer() {}
-//function getRemainingTime() {}
-function pomodoroTimer() {
-    let time = 0.5 * 60
+function getRemainingTime() {
+    let time = document.querySelector('.container-timer').innerText
+    console.log(time)
+    let hr = parseInt(time.split(':')[0])
+    let min = parseInt(time.split(':')[1])
+    let sec = parseInt(time.split(':')[2])
+    return hr * 3600 + min * 60 + sec
+}
+
+function pomodoroTimer(t) {
+    let time = t * 60
     let interval = setInterval(function () {
         time--
         let hr = Math.floor(time / 3600)
@@ -83,8 +116,8 @@ function pomodoroTimer() {
         hrs.innerText = hr
         mins.innerText = min
         secs.innerText = sec
-        currtime = document.querySelector('.container-timer').innerText
         if (time === 0) {
+            audio.play()
             counter++
             nextMode = 'shortbreak'
             clearInterval(interval)
@@ -93,8 +126,8 @@ function pomodoroTimer() {
     }, 1000)
     return interval
 }
-function shortBreakTimer() {
-    let time = 0.5 * 60
+function shortBreakTimer(t) {
+    let time = t * 60
     let interval = setInterval(function () {
         time--
         let hr = Math.floor(time / 3600)
@@ -104,6 +137,7 @@ function shortBreakTimer() {
         mins.innerText = min
         secs.innerText = sec
         if (time === 0) {
+            audio.play()
             clearInterval(interval)
             if (counter == inputLongBreak.value) {
                 nextMode = 'longbreak'
@@ -116,8 +150,8 @@ function shortBreakTimer() {
     }, 1000)
     return interval
 }
-function longBreakTimer() {
-    let time = 0.5 * 60
+function longBreakTimer(t) {
+    let time = t * 60
     let interval = setInterval(function () {
         time--
         let hr = Math.floor(time / 3600)
@@ -127,6 +161,7 @@ function longBreakTimer() {
         mins.innerText = min
         secs.innerText = sec
         if (time === 0) {
+            audio.play()
             clearInterval(interval)
             nextMode = 'pomodoro'
             checkNextTimer()
@@ -141,26 +176,18 @@ function checkNextTimer() {
         pomodoro.classList.add('active')
         shortbreak.classList.remove('active')
         longbreak.classList.remove('active')
-        g_interval = pomodoroTimer()
+        g_interval = pomodoroTimer(parseInt(pomodoroLength.value))
     } else if (nextMode === 'shortbreak') {
         clearInterval(g_interval)
         pomodoro.classList.remove('active')
         shortbreak.classList.add('active')
         longbreak.classList.remove('active')
-        g_interval = shortBreakTimer()
+        g_interval = shortBreakTimer(parseInt(shortBreakLength.value))
     } else if (nextMode === 'longbreak') {
         clearInterval(g_interval)
         pomodoro.classList.remove('active')
         shortbreak.classList.remove('active')
         longbreak.classList.add('active')
-        g_interval = longBreakTimer()
+        g_interval = longBreakTimer(parseInt(longBreakLength.value))
     }
 }
-
-setting.addEventListener('click', () => {
-    overlay.classList.add('active')
-})
-
-closepopup.addEventListener('click', () => {
-    overlay.classList.remove('active')
-})

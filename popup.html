@@ -17,8 +17,8 @@
 
             <i class="fas fa-undo" id="reset"></i>
             <button class="btn active" id="Pomodoro">Pomodoro</button>
-            <button class="btn" id="Short-break">Short-break</button>
-            <button class="btn" id="Long-break">Long-break</button>
+            <button class="btn" id="Short-break">Short Break</button>
+            <button class="btn" id="Long-break">Long Break</button>
             <i class="fas fa-cog" id="settings-popup"></i>
 
         </div>
@@ -27,38 +27,49 @@
             <div class="modal-container">
 
                 <i class="fas fa-times" id="cross"></i>
-
                 <div class="Long-break-interval">
-                    <span class="span-long">Long break Interval</span>
-                    <input class="input-long-break" type="number" value="4" min="0" step="1"></input>
-                    <span>How to use this? A pomodoro is a time-boxed activity that is usually set to 25 minutes.
-                        When the pomodoro is finished, a short break is started. The short break is usually set to
-                        5 minutes. When the short break is finished, another pomodoro is started. The long break is
-                        usually set to 15 minutes. When the long break is finished, another pomodoro is started.
 
-                        The long break interval is the number of pomodoros that are completed before a long break is
-                        You can set the long break interval to 0 to disable long breaks.
-                    </span>
+                    <div class="popup-input-type">
+                        <span class="input">Long break Interval</span>
+                        <span class="input">Pomodoro</span>
+                        <span class="input">Shortbreak</span>
+                        <span class="input">Longbreak</span>
+                    </div>
+                    <div class="popup-inputs">
+
+                        <input class="interval-longbreak" type="number" value="4" min="0" step="1"
+                            placeholder=""></input>
+                        <input class="input-pomodoro" type="number" value="25" min="0" step="1"
+                            placeholder="minutes"></input>
+                        <input class="input-shortbreak" type="number" value="5" min="0" step="1"
+                            placeholder="minutes"></input>
+                        <input class="input-longbreak" type="number" value="15" min="0" step="1"
+                            placeholder="minute"></input>
+                    </div>
                 </div>
-
+                <span class="description">Wikipedia: <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">Pomodoro
+                        Technique</a>
+                </span>
+                </span>
             </div>
 
         </div>
 
         <div class="container-timer">
 
-            <div contenteditable="true" class="hrs">00</div>
+            <div class="hrs">00</div>
             :
-            <div contenteditable="true" class="mins">00</div>
+            <div class="mins">00</div>
             :
-            <div contenteditable="true" class="secs">00</div>
+            <div class="secs">00</div>
         </div>
         <div class="timer-button">
             <button id="btn-start">Start</button>
             <!-- <button id="btn-pause">Pause</button> -->
         </div>
     </div>
-
+    <audio id="beep" preload="auto"
+        src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>
     <script src="popup.js"></script>
 </body>
 
