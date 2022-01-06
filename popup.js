@@ -48,6 +48,7 @@ reset.addEventListener('click', function () {
     hrs.innerText = '00'
     mins.innerText = '00'
     secs.innerText = '00'
+    localStorage.setItem('second', JSON.stringify(getRemainingTime()))
     clearInterval(g_interval)
     if (startpause.innerText === 'Pause') {
         startpause.innerText = 'Start'
@@ -62,6 +63,16 @@ closepopup.addEventListener('click', () => {
     overlay.classList.remove('active')
 })
 
+// localStorage.setItem('second', JSON.stringify(getRemainingTime()))
+if (JSON.parse(localStorage.getItem('second')) > 0) {
+    let time = JSON.parse(localStorage.getItem('second'))
+    let hr = Math.floor(time / 3600)
+    let min = Math.floor((time % 3600) / 60)
+    let sec = time % 60
+    hrs.innerText = hr
+    mins.innerText = min
+    secs.innerText = sec
+}
 startpause.addEventListener('click', function () {
     if (!bool && JSON.parse(localStorage.getItem('second')) === 0) {
         startpause.innerText = 'Pause'
@@ -80,7 +91,7 @@ startpause.addEventListener('click', function () {
         )
         let sec = JSON.parse(localStorage.getItem('second')) - minutes * 60
         minutes = minutes + sec / 60
-        console.log(minutes)
+        // console.log(minutes)
         if (pomodoro.classList.contains('active')) {
             g_interval = pomodoroTimer(minutes)
         } else if (shortbreak.classList.contains('active')) {
@@ -98,7 +109,7 @@ startpause.addEventListener('click', function () {
 
 function getRemainingTime() {
     let time = document.querySelector('.container-timer').innerText
-    console.log(time)
+    // console.log(time)
     let hr = parseInt(time.split(':')[0])
     let min = parseInt(time.split(':')[1])
     let sec = parseInt(time.split(':')[2])
