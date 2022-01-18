@@ -63,7 +63,7 @@ closepopup.addEventListener('click', () => {
     overlay.classList.remove('active')
 })
 
-// localStorage.setItem('second', JSON.stringify(getRemainingTime()))
+localStorage.setItem('second', JSON.stringify(getRemainingTime()))
 if (JSON.parse(localStorage.getItem('second')) > 0) {
     let time = JSON.parse(localStorage.getItem('second'))
     let hr = Math.floor(time / 3600)
